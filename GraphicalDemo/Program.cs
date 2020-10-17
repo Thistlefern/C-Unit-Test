@@ -25,6 +25,7 @@
 using static Raylib_cs.Raylib;  // core methods (InitWindow, BeginDrawing())
 using static Raylib_cs.Color;   // color (RAYWHITE, MAROON, etc.)
 using MathClasses;              // my mathmatics classes
+using GraphicalDemo;
 
 namespace Examples
 {
@@ -37,19 +38,23 @@ namespace Examples
             const int screenWidth = 800;
             const int screenHeight = 450;
 
-            InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
+            InitWindow(screenWidth, screenHeight, "Graphical Demo - Tank");
 
+            Player player = new Player();
+            player.Init(@"res\tankGreen_outline.png", @"res\barrelGreen_outline.png");
+            player.tankPos = new System.Numerics.Vector2(0, 0); // TODO make rotate from center, not top left
+                                                                // TODO after barrel is fixed, start center
+            player.barrelPos = new System.Numerics.Vector2(player.tank.width / 2, player.tank.height / 2); // TODO make rotate from center, not top left
+            
             SetTargetFPS(60);
             //--------------------------------------------------------------------------------------
-
-            
 
             // Main game loop
             while (!WindowShouldClose())    // Detect window close button or ESC key
             {
                 // Update
                 //----------------------------------------------------------------------------------
-                // TODO: Update your variables here
+                player.Update();
                 //----------------------------------------------------------------------------------
 
                 // Draw
@@ -58,7 +63,7 @@ namespace Examples
 
                 ClearBackground(RAYWHITE);
 
-                DrawText("Congrats! You created your first window!", 190, 200, 20, MAROON);
+                player.Draw();
 
                 EndDrawing();
                 //----------------------------------------------------------------------------------

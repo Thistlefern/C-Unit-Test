@@ -13,4 +13,22 @@
     <ProjectReference Include="..\MathClasses\MathClasses.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="res\barrelGreen_outline.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="res\barrelRed_outline.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="res\bulletGreenSilver_outline.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="res\tankGreen_outline.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="res\tankRed_outline.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
