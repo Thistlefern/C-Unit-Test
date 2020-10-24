@@ -8,15 +8,15 @@ namespace MathClasses
 {
     public class Color
     {
-        public UInt32 color;
-        private byte red;
+        public UInt32 color = 0;
+        private byte red = 255;
         private byte green;
         private byte blue;
         private byte alpha;
 
         public Color()
         {
-            color = 0;
+
         }
 
         public Color(byte _red, byte _green, byte _blue, byte _alpha)
@@ -44,7 +44,7 @@ namespace MathClasses
         public void SetGreen(byte green)
         {
             color = color & 0xff00ffff;
-            color |= (UInt32)red << 24;
+            color |= (UInt32)green << 16;
         }
 
         public byte GetBlue()
@@ -54,7 +54,7 @@ namespace MathClasses
         public void SetBlue(byte blue)
         {
             color = color & 0xffff00ff;
-            color |= (UInt32)red << 24;
+            color |= (UInt32)blue << 8;
         }
 
         public byte GetAlpha()
@@ -64,7 +64,7 @@ namespace MathClasses
         public void SetAlpha(byte alpha)
         {
             color = color & 0xffffff00;
-            color |= (UInt32)red << 24;
+            color |= (UInt32)alpha << 0;
         }
     }
 }

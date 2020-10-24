@@ -11,7 +11,6 @@ namespace GraphicalDemo
     {
         public Texture2D tank;
         public Texture2D barrel;
-        float rotation;
 
         public void Init(string tankFile, string barrelFile)
         {
@@ -21,8 +20,18 @@ namespace GraphicalDemo
         public void Draw()
         {
             if (active != true) return;
-            DrawTextureEx(tank, tankPos, rotation, 1f, WHITE);
-            DrawTextureEx(barrel, barrelPos, rotation, 1f, WHITE);
+            DrawTexturePro(tank,                                                            // texture 
+                           new Rectangle(0,0,tank.width, tank.height),                      // upper left
+                           new Rectangle(tankPos.X, tankPos.Y, tank.width, tank.height),    // lower right
+                           new System.Numerics.Vector2(tank.width / 2, tank.height / 2),    // point of origin
+                           rotation,                                                            // rotation
+                           WHITE);                                                          // color
+            DrawTexturePro(barrel,                                                                  // texture 
+                           new Rectangle(0, 0, barrel.width, barrel.height),                        // upper left
+                           new Rectangle(barrelPos.X, barrelPos.Y, barrel.width, barrel.height),    // lower right
+                           new System.Numerics.Vector2(barrel.width / 2, barrel.height / 2),        // point of origin
+                           rotation,                                                                    // rotation
+                           WHITE);                                                                  // color
         }
         public void Update()
         {
@@ -38,11 +47,11 @@ namespace GraphicalDemo
             }
             if (IsKeyDown(KeyboardKey.KEY_A))
             {
-                rotation += 1f;
+                rotation -= 1;
             }
             if (IsKeyDown(KeyboardKey.KEY_D))
             {
-                rotation -= 1f;
+                rotation += 1;
             }
             if(IsKeyDown(KeyboardKey.KEY_Q))
             {

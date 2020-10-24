@@ -29,7 +29,7 @@ using GraphicalDemo;
 
 namespace Examples
 {
-    public class core_basic_window
+    public class Core_basic_window
     {
         public static int Main()
         {
@@ -42,7 +42,7 @@ namespace Examples
 
             Player player = new Player();
             player.Init(@"res\tankGreen_outline.png", @"res\barrelGreen_outline.png");
-            player.tankPos = new System.Numerics.Vector2(0, 0); // TODO make rotate from center, not top left
+            player.tankPos = new System.Numerics.Vector2(50, 50); // TODO make rotate from center, not top left
                                                                 // TODO after barrel is fixed, start center
             player.barrelPos = new System.Numerics.Vector2(player.tank.width / 2, player.tank.height / 2); // TODO make rotate from center, not top left
             

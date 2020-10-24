@@ -12,6 +12,7 @@ namespace GraphicalDemo
     {
         public Vector2 tankPos = new Vector2();
         public Vector2 barrelPos = new Vector2();
+        public float rotation;
         public bool active = true;
     }
 }

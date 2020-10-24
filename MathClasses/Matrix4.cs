@@ -9,22 +9,36 @@ namespace MathClasses
     public class Matrix4
     {
         public float m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, m14, m15, m16;
-        private float v1;
-        private float v2;
-        private float v3;
-        private float v4;
-        private float v5;
-        private float v6;
-        private float v7;
-        private float v8;
-        private float v9;
-        private float v10;
-        private float v11;
-        private float v12;
-        private float v13;
-        private float v14;
-        private float v15;
-        private float v16;
+        private float v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16;
+
+        public static Matrix4 operator * (Matrix4 lhs, Matrix4 rhs) // for multiplying two Matrix3s together
+        {
+            return new Matrix4(
+                // 1   2   3   4
+                // 5   6   7   8
+                // 9   10  11  12
+                // 13  14  15  16
+
+                lhs.m1 * rhs.m1 + lhs.m5 * rhs.m2 + lhs.m9 * rhs.m3 + lhs.m13 * rhs.m4,         // new m1
+                lhs.m2 * rhs.m1 + lhs.m6 * rhs.m2 + lhs.m10 * rhs.m3 + lhs.m14 * rhs.m4,        // new m2
+                lhs.m3 * rhs.m1 + lhs.m7 * rhs.m2 + lhs.m11 * rhs.m3 + lhs.m15 * rhs.m4,        // new m3
+                lhs.m4 * rhs.m1 + lhs.m8 * rhs.m2 + lhs.m12 * rhs.m3 + lhs.m16 * rhs.m4,        // new m4
+
+                lhs.m1 * rhs.m5 + lhs.m5 * rhs.m6 + lhs.m9 * rhs.m7 + lhs.m13 * rhs.m8,         // new m5
+                lhs.m2 * rhs.m5 + lhs.m6 * rhs.m6 + lhs.m10 * rhs.m7 + lhs.m14 * rhs.m8,        // new m6
+                lhs.m3 * rhs.m5 + lhs.m7 * rhs.m6 + lhs.m11 * rhs.m7 + lhs.m15 * rhs.m8,        // new m7
+                lhs.m4 * rhs.m5 + lhs.m8 * rhs.m6 + lhs.m12 * rhs.m7 + lhs.m16 * rhs.m8,        // new m8
+
+                lhs.m1 * rhs.m9 + lhs.m5 * rhs.m10 + lhs.m9 * rhs.m11 + lhs.m13 * rhs.m12,      // new m9
+                lhs.m2 * rhs.m9 + lhs.m6 * rhs.m10 + lhs.m10 * rhs.m11 + lhs.m14 * rhs.m12,     // new m10
+                lhs.m3 * rhs.m9 + lhs.m7 * rhs.m10 + lhs.m11 * rhs.m11 + lhs.m15 * rhs.m12,     // new m11
+                lhs.m4 * rhs.m9 + lhs.m8 * rhs.m10 + lhs.m12 * rhs.m11 + lhs.m16 * rhs.m12,     // new m12
+
+                lhs.m1 * rhs.m13 + lhs.m5 * rhs.m14 + lhs.m9 * rhs.m15 + lhs.m13 * rhs.m16,     // new m13
+                lhs.m2 * rhs.m13 + lhs.m6 * rhs.m14 + lhs.m10 * rhs.m15 + lhs.m14 * rhs.m16,    // new m14
+                lhs.m3 * rhs.m13 + lhs.m7 * rhs.m14 + lhs.m11 * rhs.m15 + lhs.m15 * rhs.m16,    // new m15
+                lhs.m4 * rhs.m13 + lhs.m8 * rhs.m14 + lhs.m12 * rhs.m15 + lhs.m16 * rhs.m16);   // new m16
+        }
 
         public Matrix4()
         {
@@ -61,28 +75,66 @@ namespace MathClasses
             m9 = _m9; m10 = _m10; m11 = _m11; m12 = _m12;
             m13 = _m13; m14 = _m14; m15 = _m15; m16 = _m16;
         }
+        public void Set(Matrix4 other)
+        {
+            this.m1 = other.m1;
+            this.m2 = other.m2;
+            this.m3 = other.m3;
+            this.m4 = other.m4;
+            this.m5 = other.m5;
+            this.m6 = other.m6;
+            this.m7 = other.m7;
+            this.m8 = other.m8;
+            this.m9 = other.m9;
+            this.m10 = other.m10;
+            this.m11 = other.m11;
+            this.m12 = other.m12;
+            this.m13 = other.m13;
+            this.m14 = other.m14;
+            this.m15 = other.m15;
+            this.m16 = other.m16;
+        }
 
         public void SetRotateX(double radians)
         {
             Set(1, 0, 0, 0,
-                0, (float)Math.Cos(radians), (float)Math.Sin(radians), 0,
-                0, (float)-Math.Sin(radians), (float)Math.Cos(radians), 0,
-                0, 0, 0, 0);
+                0, (float)Math.Cos(radians), (float)-Math.Sin(radians), 0,
+                0, (float)Math.Sin(radians), (float)Math.Cos(radians), 0,
+                0, 0, 0, 1);
         }
+        public void RotateX(double radiansX)
+        {
+            Matrix4 rotate = new Matrix4();
+            rotate.SetRotateX(radiansX);
+            Set(this * rotate);
+        }
+
         public void SetRotateY(double radians)
         {
-            Set((float)Math.Cos(radians), 0, (float)-Math.Sin(radians), 0,
+            Set((float)Math.Cos(radians), 0, (float)Math.Sin(radians), 0,
                 0, 1, 0, 0,
-                (float)Math.Sin(radians), 0, (float)Math.Cos(radians), 0,
-                0, 0, 0, 0);
+                (float)-Math.Sin(radians), 0, (float)Math.Cos(radians), 0,
+                0, 0, 0, 1);
+        }
+        public void RotateY(double radiansY)
+        {
+            Matrix4 rotate = new Matrix4();
+            rotate.SetRotateY(radiansY);
+            Set(this * rotate);
         }
 
         public void SetRotateZ(double radians)
         {
-            Set((float)Math.Cos(radians), (float)Math.Sin(radians), 0, 0,
-                (float)-Math.Sin(radians), (float)Math.Cos(radians), 0, 0,
+            Set((float)Math.Cos(radians), (float)-Math.Sin(radians), 0, 0,
+                (float)Math.Sin(radians), (float)Math.Cos(radians), 0, 0,
                 0, 0, 1, 0,
-                0, 0, 0, 0);
+                0, 0, 0, 1);
+        }
+        public void RotateZ(double radiansZ)
+        {
+            Matrix4 rotate = new Matrix4();
+            rotate.SetRotateZ(radiansZ);
+            Set(this * rotate);
         }
     }
 }

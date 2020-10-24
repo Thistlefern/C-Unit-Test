@@ -24,6 +24,23 @@ namespace MathClasses
             z = _z;
         }
 
+        public static Vector3 operator + (Vector3 lhs, Vector3 rhs)
+        {
+            return new Vector3(lhs.x + rhs.x, lhs.y + rhs.y, lhs.z + rhs.z);
+        }
+        public static Vector3 operator - (Vector3 lhs, Vector3 rhs)
+        {
+            return new Vector3(lhs.x - rhs.x, lhs.y - rhs.y, lhs.z - rhs.z);
+        }
+
+        public static Vector3 operator *(Matrix3 lhs, Vector3 rhs)
+        {
+            return new Vector3((lhs.m1 * rhs.x) + (lhs.m4 * rhs.y) + (lhs.m7 * rhs.z),
+                               (lhs.m2 * rhs.x) + (lhs.m5 * rhs.y) + (lhs.m8 * rhs.z),
+                               (lhs.m3 * rhs.x) + (lhs.m6 * rhs.y) + (lhs.m9 * rhs.z));
+        }
+
+
         public float Dot(Vector3 b)
         {
             return (x * b.x) + (y * b.y) + (z * b.z);
@@ -41,6 +58,15 @@ namespace MathClasses
         {
             return (float)Math.Sqrt((x * x) + (y * y) + (z * z));
         }
+
+        public float Distance(Vector3 other)
+        {
+            float diffX = x - other.x;
+            float diffY = y - other.y;
+            float diffZ = z - other.z;
+            return (float)Math.Sqrt(diffX * diffX + diffY * diffY + diffZ * diffZ);
+        }
+
 
         public void Normalize()
         {

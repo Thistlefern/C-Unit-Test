@@ -32,12 +32,13 @@ namespace MathClasses
         }
 
         public Vector4 Cross(Vector4 b)
-        {
-            return new Vector4(
+        {                       // 13.5f, -48.23f, 862, 0);
+            return new Vector4( // (5, 3.99f, -12, 1);
+                                // (-2860.62011719f, 4472.00000000f, 295.01498413f, 0)));
                 (y * b.z) - (z * b.y),
-                (z * b.w) - (w * b.z),
-                (w * b.x) - (x * b.w),
-                (x * b.y) - (y * b.x));
+                (z * b.x) - (x * b.z),
+                (x * b.y) - (y * b.x),
+                0);
         }
 
         public float Magnitude()
@@ -53,5 +54,14 @@ namespace MathClasses
             z /= m;
             w /= m;
         }
+        public float Distance(Vector4 other)
+        {
+            float diffX = x - other.x;
+            float diffY = y - other.y;
+            float diffZ = z - other.z;
+            float diffW = w - other.w;
+            return (float)Math.Sqrt(diffX * diffX + diffY * diffY + diffZ * diffZ + diffW * diffW);
+        }
+
     }
 }
