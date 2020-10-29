@@ -8,23 +8,20 @@ namespace MathClasses
 {
     public class Color
     {
-        public UInt32 color = 0;
+        public UInt32 color;
         private byte red = 255;
-        private byte green;
-        private byte blue;
-        private byte alpha;
+        private byte green = 255;
+        private byte blue = 255;
+        private byte alpha = 255;
 
         public Color()
         {
 
         }
 
-        public Color(byte _red, byte _green, byte _blue, byte _alpha)
+        public Color(byte red, byte green, byte blue, byte alpha)
         {
-            red = _red;
-            green = _green;
-            blue = _blue;
-            alpha = _alpha;
+            
         }
 
         public byte GetRed()

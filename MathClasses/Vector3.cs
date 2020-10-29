@@ -24,22 +24,28 @@ namespace MathClasses
             z = _z;
         }
 
-        public static Vector3 operator + (Vector3 lhs, Vector3 rhs)
+        public static Vector3 operator + (Vector3 lhs, Vector3 rhs) // vec3 + vec3
         {
             return new Vector3(lhs.x + rhs.x, lhs.y + rhs.y, lhs.z + rhs.z);
         }
-        public static Vector3 operator - (Vector3 lhs, Vector3 rhs)
+        public static Vector3 operator - (Vector3 lhs, Vector3 rhs) // vec3 - vec3
         {
             return new Vector3(lhs.x - rhs.x, lhs.y - rhs.y, lhs.z - rhs.z);
         }
-
-        public static Vector3 operator *(Matrix3 lhs, Vector3 rhs)
+        public static Vector3 operator * (Vector3 lhs, float rhs) // vec3 * float
+        {
+            return new Vector3(lhs.x * rhs, lhs.y * rhs, lhs.z * rhs);
+        }
+        public static Vector3 operator * (float lhs, Vector3 rhs) // float * vec3
+        {
+            return new Vector3(lhs * rhs.x, lhs * rhs.y, lhs * rhs.z);
+        }
+        public static Vector3 operator * (Matrix3 lhs, Vector3 rhs) // mat3 * vec3
         {
             return new Vector3((lhs.m1 * rhs.x) + (lhs.m4 * rhs.y) + (lhs.m7 * rhs.z),
                                (lhs.m2 * rhs.x) + (lhs.m5 * rhs.y) + (lhs.m8 * rhs.z),
                                (lhs.m3 * rhs.x) + (lhs.m6 * rhs.y) + (lhs.m9 * rhs.z));
         }
-
 
         public float Dot(Vector3 b)
         {

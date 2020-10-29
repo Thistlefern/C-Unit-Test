@@ -10,7 +10,6 @@ namespace MathClasses
     public class Matrix3
     {
         public float m1, m2, m3, m4, m5, m6, m7, m8, m9;
-        private float v1, v2, v3, v4, v5, v6, v7, v8, v9;
 
         public Matrix3()
         {
@@ -19,17 +18,17 @@ namespace MathClasses
             m7 = 0; m8 = 0; m9 = 1;
         }
 
-        public Matrix3(float _v1, float _v2, float _v3, float _v4, float _v5, float _v6, float _v7, float _v8, float _v9)
+        public Matrix3(float _m1, float _m2, float _m3, float _m4, float _m5, float _m6, float _m7, float _m8, float _m9)
         {
-            v1 = _v1;
-            v2 = _v2;
-            v3 = _v3;
-            v4 = _v4;
-            v5 = _v5;
-            v6 = _v6;
-            v7 = _v7;
-            v8 = _v8;
-            v9 = _v9;
+            m1 = _m1;
+            m2 = _m2;
+            m3 = _m3;
+            m4 = _m4;
+            m5 = _m5;
+            m6 = _m6;
+            m7 = _m7;
+            m8 = _m8;
+            m9 = _m9;
         }
 
         public static Matrix3 operator * (Matrix3 lhs, Matrix3 rhs) // for multiplying two Matrix3s together

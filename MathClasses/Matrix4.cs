@@ -9,7 +9,6 @@ namespace MathClasses
     public class Matrix4
     {
         public float m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, m14, m15, m16;
-        private float v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16;
 
         public static Matrix4 operator * (Matrix4 lhs, Matrix4 rhs) // for multiplying two Matrix3s together
         {
@@ -48,24 +47,24 @@ namespace MathClasses
             m13= 0; m14= 0; m15= 0; m16= 1;
         }
 
-        public Matrix4(float _v1, float _v2, float _v3, float _v4, float _v5, float _v6, float _v7, float _v8, float _v9, float _v10, float _v11, float _v12, float _v13, float _v14, float _v15, float _v16)
+        public Matrix4(float _m1, float _m2, float _m3, float _m4, float _m5, float _m6, float _m7, float _m8, float _m9, float _m10, float _m11, float _m12, float _m13, float _m14, float _m15, float _m16)
         {
-            v1 = _v1;
-            v2 = _v2;
-            v3 = _v3;
-            v4 = _v4;
-            v5 = _v5;
-            v6 = _v6;
-            v7 = _v7;
-            v8 = _v8;
-            v9 = _v9;
-            v10 = _v10;
-            v11 = _v11;
-            v12 = _v12;
-            v13 = _v13;
-            v14 = _v14;
-            v15 = _v15;
-            v16 = _v16;
+            m1 = _m1;
+            m2 = _m2;
+            m3 = _m3;
+            m4 = _m4;
+            m5 = _m5;
+            m6 = _m6;
+            m7 = _m7;
+            m8 = _m8;
+            m9 = _m9;
+            m10 = _m10;
+            m11 = _m11;
+            m12 = _m12;
+            m13 = _m13;
+            m14 = _m14;
+            m15 = _m15;
+            m16 = _m16;
         }
 
         public void Set(float _m1, float _m2, float _m3, float _m4, float _m5, float _m6, float _m7, float _m8, float _m9, float _m10, float _m11, float _m12, float _m13, float _m14, float _m15, float _m16)
@@ -94,6 +93,14 @@ namespace MathClasses
             this.m15 = other.m15;
             this.m16 = other.m16;
         }
+
+        public static Vector4 operator * (Matrix4 lhs, Vector4 rhs)
+        {
+            return new Vector4((lhs.m1 * rhs.x) + (lhs.m5 * rhs.y) + (lhs.m9 * rhs.z) + (lhs.m13 * rhs.w),
+                               (lhs.m2 * rhs.x) + (lhs.m6 * rhs.y) + (lhs.m10 * rhs.z) + (lhs.m14 * rhs.w),
+                               (lhs.m3 * rhs.x) + (lhs.m7 * rhs.y) + (lhs.m11 * rhs.z) + (lhs.m15 * rhs.w),
+                               (lhs.m4 * rhs.x) + (lhs.m8 * rhs.y) + (lhs.m12 * rhs.z) + (lhs.m16 * rhs.w));
+        } 
 
         public void SetRotateX(double radians)
         {
