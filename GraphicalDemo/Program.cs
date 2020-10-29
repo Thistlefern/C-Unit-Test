@@ -42,9 +42,12 @@ namespace Examples
 
             Player player = new Player();
             player.Init(@"res\tankGreen_outline.png", @"res\barrelGreen_outline.png");
-            player.tankPos = new System.Numerics.Vector2(50, 50); // TODO make rotate from center, not top left
-                                                                // TODO after barrel is fixed, start center
-            player.barrelPos = new System.Numerics.Vector2(player.tank.width / 2, player.tank.height / 2); // TODO make rotate from center, not top left
+            player.tankPos = new Vector3(screenWidth / 2, screenHeight / 2, 0);
+            player.tankPos = new Vector3(player.tankPos.x, player.tankPos.y, player.tankPos.z);     // TODO make rotate from center, not top left
+            player.barrelPos = new Vector3(0, 0, 0);                                // TODO make rotate from center, not top left
+            player.tankRotation = new Matrix3(player.tankPos.x, 0, 0,
+                                              0, player.tankPos.y, 0,
+                                              0, 0, 0);
             
             SetTargetFPS(60);
             //--------------------------------------------------------------------------------------
