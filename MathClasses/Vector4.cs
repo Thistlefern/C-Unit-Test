@@ -50,9 +50,8 @@ namespace MathClasses
         }
 
         public Vector4 Cross(Vector4 b)
-        {                       // 13.5f, -48.23f, 862, 0);
-            return new Vector4( // (5, 3.99f, -12, 1);
-                                // (-2860.62011719f, 4472.00000000f, 295.01498413f, 0)));
+        {                      
+            return new Vector4(
                 (y * b.z) - (z * b.y),
                 (z * b.x) - (x * b.z),
                 (x * b.y) - (y * b.x),

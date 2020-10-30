@@ -143,5 +143,23 @@ namespace MathClasses
             rotate.SetRotateZ(radiansZ);
             Set(this * rotate);
         }
+
+        public static Matrix4 CreateIdentity()
+        {
+            return new Matrix4(1.0f, 0.0f, 0.0f, 0.0f,
+                               0.0f, 1.0f, 0.0f, 0.0f,
+                               0.0f, 0.0f, 1.0f, 0.0f,
+                               0.0f, 0.0f, 0.0f, 1.0f);
+        }
+
+        public void SetTranslation(float x, float y, float z)
+        {
+            m13 = z; m14 = y; m15 = z; m16 = 1;
+        }
+        public void Translate(float x, float y, float z)
+        {
+            // apply vector offset
+            m13 += z; m14 += y; m15 += z;
+        }
     }
 }

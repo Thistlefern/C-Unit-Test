@@ -27,57 +27,24 @@ using static Raylib_cs.Color;   // color (RAYWHITE, MAROON, etc.)
 using MathClasses;              // my mathmatics classes
 using GraphicalDemo;
 
-namespace Examples
+namespace GraphicalDemo
 {
-    public class Core_basic_window
+    class Program
     {
-        public static int Main()
+        static void Main(string[] args)
         {
-            // Initialization
-            //--------------------------------------------------------------------------------------
-            const int screenWidth = 800;
-            const int screenHeight = 450;
-
-            InitWindow(screenWidth, screenHeight, "Graphical Demo - Tank");
-
-            Player player = new Player();
-            player.Init(@"res\tankGreen_outline.png", @"res\barrelGreen_outline.png");
-            player.tankPos = new Vector3(screenWidth / 2, screenHeight / 2, 0);
-            player.tankPos = new Vector3(player.tankPos.x, player.tankPos.y, player.tankPos.z);     // TODO make rotate from center, not top left
-            player.barrelPos = new Vector3(0, 0, 0);                                // TODO make rotate from center, not top left
-            player.tankRotation = new Matrix3(player.tankPos.x, 0, 0,
-                                              0, player.tankPos.y, 0,
-                                              0, 0, 0);
+            Game game = new Game();
             
             SetTargetFPS(60);
-            //--------------------------------------------------------------------------------------
-
-            // Main game loop
-            while (!WindowShouldClose())    // Detect window close button or ESC key
+            InitWindow(640, 480, "Tanks for Everything!");
+            game.Init();
+            while (!WindowShouldClose())
             {
-                // Update
-                //----------------------------------------------------------------------------------
-                player.Update();
-                //----------------------------------------------------------------------------------
-
-                // Draw
-                //----------------------------------------------------------------------------------
-                BeginDrawing();
-
-                ClearBackground(RAYWHITE);
-
-                player.Draw();
-
-                EndDrawing();
-                //----------------------------------------------------------------------------------
+                game.Update();
+                game.Draw();
             }
-
-            // De-Initialization
-            //--------------------------------------------------------------------------------------
-            CloseWindow();        // Close window and OpenGL context
-            //--------------------------------------------------------------------------------------
-
-            return 0;
+            game.Shutdown();
+            CloseWindow();
         }
     }
 }
