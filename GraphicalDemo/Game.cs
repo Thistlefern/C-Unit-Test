@@ -20,33 +20,41 @@ namespace GraphicalDemo
         private int frames;
         private float deltaTime = 0.005f;
 
+        SceneObject bulletObject = new SceneObject();
         SceneObject tankObject = new SceneObject();
         SceneObject turretObject = new SceneObject();
+        SpriteObject bulletSprite = new SpriteObject();
         SpriteObject tankSprite = new SpriteObject();
         SpriteObject turretSprite = new SpriteObject();
+
+        bool bulletActive = false;
 
 
         public void Init()
         {
             stopwatch.Start();
             lastTime = stopwatch.ElapsedMilliseconds;
+
+            bulletSprite.Load(@"res\bulletGreenSilver_outline.png");
+
             tankSprite.Load(@"res\tankGreen_outline.png");
-
-            // sets an offset for the base, so it rotates around the centre
-            tankSprite.SetPosition(-tankSprite.Width / 2.0f, -tankSprite.Height / 2.0f);
+            tankSprite.SetPosition(-tankSprite.Width / 2.0f, -tankSprite.Height / 2.0f); // sets an offset for the base, so it rotates around the centre
+            
             turretSprite.Load(@"res\barrelGreen_outline.png");
+            turretSprite.SetPosition(0, -turretSprite.Height / 2.0f); // set the turret offset from the tank base
 
-            // set the turret offset from the tank base
-            turretSprite.SetPosition(0, -turretSprite.Height / 2.0f);
+
             // set up the scene object hierarchy - parent the turret to the base,
             // then the base to the tank sceneObject
 
+            bulletObject.AddChild(bulletSprite);
             turretObject.AddChild(turretSprite);
             tankObject.AddChild(tankSprite);
             tankObject.AddChild(turretObject);
             // having an empty object for the tank parent means we can set the
             // position/rotation of the tank without
             // affecting the offset of the base sprite
+            bulletObject.SetPosition(GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f);
             tankObject.SetPosition(GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f);
         }
         public void Shutdown()
@@ -67,33 +75,85 @@ namespace GraphicalDemo
             if (IsKeyDown(KeyboardKey.KEY_A))
             {
                 tankObject.Rotate(deltaTime);
+                if (bulletActive == false)
+                {
+                    bulletObject.Rotate(deltaTime);
+                }
             }
             if (IsKeyDown(KeyboardKey.KEY_D))
             {
                 tankObject.Rotate(-deltaTime);
+                if (bulletActive == false)
+                {
+                    bulletObject.Rotate(-deltaTime);
+                }
             }
             if (IsKeyDown(KeyboardKey.KEY_W))
             {
                 Vector3 facing = new Vector3(
-               tankObject.LocalTransform.m1,
-               tankObject.LocalTransform.m2, 1) * deltaTime * 100;
-                tankObject.Translate(facing.x, facing.y);
+                    tankObject.LocalTransform.m1,
+                    tankObject.LocalTransform.m2, 1) * deltaTime * 100;
+                    tankObject.Translate(facing.x, facing.y);
+
+                if (bulletActive == false)
+                {
+                    Vector3 bulletFacing = new Vector3(
+                    bulletObject.LocalTransform.m1,
+                    bulletObject.LocalTransform.m2, 1) * deltaTime * 100;
+                    bulletObject.Translate(bulletFacing.x, bulletFacing.y);
+                }
             }
             if (IsKeyDown(KeyboardKey.KEY_S))
             {
                 Vector3 facing = new Vector3(
-               tankObject.LocalTransform.m1,
-               tankObject.LocalTransform.m2, 1) * deltaTime * -100;
-                tankObject.Translate(facing.x, facing.y);
+                    tankObject.LocalTransform.m1,
+                    tankObject.LocalTransform.m2, 1) * deltaTime * -100;
+                    tankObject.Translate(facing.x, facing.y);
+
+                if (bulletActive == false)
+                {
+                    Vector3 bulletFacing = new Vector3(
+                    bulletObject.LocalTransform.m1,
+                    bulletObject.LocalTransform.m2, 1) * deltaTime * -100;
+                    bulletObject.Translate(bulletFacing.x, bulletFacing.y);
+                }
             }
             if (IsKeyDown(KeyboardKey.KEY_Q))
             {
                 turretObject.Rotate(deltaTime);
+                if(bulletActive == false)
+                {
+                    bulletObject.Rotate(deltaTime);
+                }
             }
             if (IsKeyDown(KeyboardKey.KEY_E))
             {
                 turretObject.Rotate(-deltaTime);
+                if (bulletActive == false)
+                {
+                    bulletObject.Rotate(-deltaTime);
+                }
             }
+            if (IsKeyPressed(KeyboardKey.KEY_SPACE))
+            {
+                if(bulletActive == false)
+                {
+                    bulletActive = true;
+                }
+            }
+
+            if (bulletActive == true)
+            {
+                for (int i = 0; i < 20; i++)
+                {
+                    Vector3 facing = new Vector3(
+                        bulletObject.LocalTransform.m1,
+                        bulletObject.LocalTransform.m2,
+                        1) * deltaTime * 50;
+                    bulletObject.Translate(facing.x, facing.y);
+                }
+            }
+
             tankObject.Update(deltaTime);
 
             lastTime = currentTime;
@@ -103,9 +163,10 @@ namespace GraphicalDemo
             BeginDrawing();
 
             ClearBackground(WHITE);
-            DrawText(fps.ToString(), 10, 10, 12, RED);
 
+            bulletObject.Draw();
             tankObject.Draw();
+            DrawText("Bullet fired: " + bulletActive.ToString(), 20, 20, 20, BLUE);
 
             EndDrawing();
         }

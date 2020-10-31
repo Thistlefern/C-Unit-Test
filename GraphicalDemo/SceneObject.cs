@@ -78,23 +78,21 @@ namespace GraphicalDemo
         }
         protected virtual void OnDraw()
         {
-            // red blip at position
-            DrawCircle((int)globalTransform.m7, (int)globalTransform.m8, 10f, RED);
+            //// red blip at position
+            //DrawCircle((int)globalTransform.m7, (int)globalTransform.m8, 10f, RED);
 
-            // draw forward - m1 and m2 (x and y axes of the forward vector)
-            //               
-            //                adding the forwad vector to our position so we can put the line on the circle
-            float fwdX = globalTransform.m1 * 90.0f + globalTransform.m7;
-            float fwdY = globalTransform.m2 * 90.0f + globalTransform.m8;
+            //// draw forward - m1 and m2 (x and y axes of the forward vector)
+            ////               
+            ////                adding the forwad vector to our position so we can put the line on the circle
+            //float fwdX = globalTransform.m1 * 90.0f + globalTransform.m7;
+            //float fwdY = globalTransform.m2 * 90.0f + globalTransform.m8;
 
-            DrawLine((int)globalTransform.m7, (int)globalTransform.m8, (int)fwdX, (int)fwdY, RED);
+            //DrawLine((int)globalTransform.m7, (int)globalTransform.m8, (int)fwdX, (int)fwdY, RED);
 
-            // x scale is equal to the magnitude of the X-axis (m1 and m2)
-            // y scale is equal to the magnitude of the Y-axis (m4 and m5)
-            float sclX = (float)Math.Sqrt(globalTransform.m1 * globalTransform.m1 + globalTransform.m2 * globalTransform.m2);
-            float sclY = (float)Math.Sqrt(globalTransform.m4 * globalTransform.m4 + globalTransform.m5 * globalTransform.m5);
-
-            DrawText("Scale: " + sclX.ToString("0.0") + "," + sclY.ToString("0.0"), 10, 10, 18, RED);
+            //// x scale is equal to the magnitude of the X-axis (m1 and m2)
+            //// y scale is equal to the magnitude of the Y-axis (m4 and m5)
+            //float sclX = (float)Math.Sqrt(globalTransform.m1 * globalTransform.m1 + globalTransform.m2 * globalTransform.m2);
+            //float sclY = (float)Math.Sqrt(globalTransform.m4 * globalTransform.m4 + globalTransform.m5 * globalTransform.m5);
         }
         public void Update(float deltaTime)
         {

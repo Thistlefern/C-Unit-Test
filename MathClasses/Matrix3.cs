@@ -141,7 +141,7 @@ namespace MathClasses
         public void Translate(float x, float y)
         {
             // apply vector offset
-            m7 += x; m8 += y; // TODO is this right?
+            m7 += x; m8 += y;
         }
 
         public static Matrix3 CreateIdentity()

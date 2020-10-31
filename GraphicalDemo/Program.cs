@@ -36,7 +36,7 @@ namespace GraphicalDemo
             Game game = new Game();
             
             SetTargetFPS(60);
-            InitWindow(640, 480, "Tanks for Everything!");
+            InitWindow(1280, 960, "Tank Goodness Math for Games is DONE!");
             game.Init();
             while (!WindowShouldClose())
             {
